@@ -1,0 +1,227 @@
+{
+  "name": "my-first-webpackage",
+  "groupId": "",
+  "version": "0.1.0-SNAPSHOT",
+  "modelVersion": "10.0.0",
+  "docType": "webpackage",
+  "author": {
+    "name": "John Doe",
+    "email": "john.doe@email.com"
+  },
+  "license": "MIT",
+  "keywords": [],
+  "man": [],
+  "artifacts": {
+    "apps": [
+      {
+        "artifactId": "docs",
+        "description": "Generated webpackage documentation.",
+        "runnables": [
+          {
+            "name": "docs",
+            "path": "/index.html",
+            "description": "Show the interface of this component."
+          }
+        ]
+      }
+    ],
+    "elementaryComponents": [
+      {
+        "artifactId": "currency-converter",
+        "description": "Elementary that uses an api to Convert currencies",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface of this component."
+          }
+        ],
+        "resources": [
+          "currency-converter.css",
+          "currency-converter.html"
+        ],
+        "dependencies": [
+          {
+            "webpackageId": "cubx.core.rte@3.0.0-SNAPSHOT",
+            "artifactId": "cubxcomponent"
+          }
+        ],
+        "slots": [
+          {
+            "slotId": "base",
+            "type": "string",
+            "direction": [
+              "input"
+            ],
+            "value": "EUR"
+          },
+          {
+            "slotId": "date",
+            "type": "string",
+            "direction": [
+              "input"
+            ],
+            "value": "2018-01-01"
+          },
+          {
+            "slotId": "foreignCurrency",
+            "type": "string",
+            "direction": [
+              "input"
+            ],
+            "value": "USD"
+          },
+          {
+            "slotId": "conversion",
+            "type": "number",
+            "direction": [
+              "output"
+            ]
+          },
+          {
+            "slotId": "conversionArray",
+            "type": "array",
+            "direction": [
+              "output"
+            ]
+          }
+        ]
+      }
+    ],
+    "compoundComponents": [
+      {
+        "artifactId": "currency-viewer",
+        "description": "Component to display currency differences in a bar-chart",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/currency-viewer.css",
+          "currency-viewer-template.html"
+        ],
+        "dependencies": [
+          {
+            "artifactId": "currency-converter"
+          },
+          {
+            "webpackageId": "com.incowia.lib.chart-library@1.0.0",
+            "artifactId": "bar-chart"
+          }
+        ],
+        "slots": [],
+        "members": [
+          {
+            "memberId": "currencyConverter",
+            "artifactId": "currency-converter"
+          },
+          {
+            "memberId": "chart",
+            "artifactId": "bar-chart"
+          }
+        ],
+        "connections": [
+          {
+            "connectionId": "data-connection",
+            "source": {
+              "memberIdRef": "currencyConverter",
+              "slot": "conversionArray"
+            },
+            "destination": {
+              "memberIdRef": "chart",
+              "slot": "dataColumns"
+            }
+          }
+        ],
+        "inits": []
+      },
+      {
+        "artifactId": "currency-viewer-init",
+        "description": "Component to display currency differences in a bar-chart, with initialisation",
+        "runnables": [
+          {
+            "name": "demo",
+            "path": "/demo/index.html",
+            "description": "Demo app..."
+          },
+          {
+            "name": "docs",
+            "path": "/docs/index.html",
+            "description": "Show the interface and dataflow of this component."
+          }
+        ],
+        "resources": [
+          "css/currency-viewer-init.css",
+          "currency-viewer-init-template.html"
+        ],
+        "dependencies": [
+          {
+            "artifactId": "currency-converter"
+          },
+          {
+            "webpackageId": "com.incowia.lib.chart-library@1.0.0",
+            "artifactId": "bar-chart"
+          }
+        ],
+        "slots": [],
+        "members": [
+          {
+            "memberId": "currencyConverter",
+            "artifactId": "currency-converter"
+          },
+          {
+            "memberId": "chart",
+            "artifactId": "bar-chart"
+          }
+        ],
+        "connections": [
+          {
+            "connectionId": "data-connection",
+            "source": {
+              "memberIdRef": "currencyConverter",
+              "slot": "conversionArray"
+            },
+            "destination": {
+              "memberIdRef": "chart",
+              "slot": "dataColumns"
+            }
+          }
+        ],
+        "inits": [
+          {
+            "slot": "base",
+            "memberIdRef": "currencyConverter",
+            "value": "GBP",
+            "description": "Pound sterling would be the default base currency"
+          },
+          {
+            "slot": "foreignCurrency",
+            "memberIdRef": "currencyConverter",
+            "value": "EUR",
+            "description": "Euro would be the default target currency"
+          },
+          {
+            "slot": "date",
+            "memberIdRef": "currencyConverter",
+            "value": "2018-06-23",
+            "description": "Default date for the currency conversion"
+          }
+        ]
+      }
+    ],
+    "utilities": []
+  }
+}
