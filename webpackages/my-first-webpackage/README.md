@@ -21,7 +21,7 @@ For example, lets initialize the `base` slot to get the basic package of ckedito
 <currency-converter cubx-webpackage-id="my-first-webpackage@0.1.0-SNAPSHOT">
     <!--Initilization-->
     <cubx-core-init style="display:none">
-        <cubx-core-slot-init slot="base">EUR</cubx-core-slot-init>
+        <cubx-core-slot-init slot="base">"EUR"</cubx-core-slot-init>
     </cubx-core-init>
 </currency-converter>
 ```
@@ -33,7 +33,7 @@ var component= document.querySelector('currency-converter');
 // Wait until CIF is ready
 document.addEventListener('cifReady', function() {
   // Manipulate slots
-  component.setBase(EUR);
+  component.setBase("EUR");
 });
 ```
 
