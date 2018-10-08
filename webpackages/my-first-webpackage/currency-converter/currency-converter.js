@@ -111,7 +111,6 @@
         xhttp.onreadystatechange = function () {
           if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(xhttp.responseText);
-            console.log(data);
             // Update the Cubbles component model slots using the setters
             var converted = data[conversionKey]['val'][queryDate];
             self.setConversion(converted);
