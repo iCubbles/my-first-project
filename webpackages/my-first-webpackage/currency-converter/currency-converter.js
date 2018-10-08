@@ -7,26 +7,22 @@
     /**
      * Manipulate an element’s local DOM when the element is created.
      */
-    created: function () {
-    },
+    created: function () {},
 
     /**
      * Manipulate an element’s local DOM when the element is created and initialized.
      */
-    ready: function () {
-    },
+    ready: function () {},
 
     /**
      * Manipulate an element’s local DOM when the element is attached to the document.
      */
-    connected: function () {
-    },
+    connected: function () {},
 
     /**
      * Manipulate an element’s local DOM when the element is dettached to the document.
      */
-    disconnected: function () {
-    },
+    disconnected: function () {},
 
     /**
      * Manipulate an element’s local DOM when the cubbles framework is initialized and ready to work.
@@ -37,17 +33,17 @@
       this.$.date.setAttribute('value', this.getDate());
       this.sendQuery();
 
-      this.$.convertBtn.addEventListener('click', function() {
+      this.$.convertBtn.addEventListener('click', function () {
         this.getFormValuesAndSendQuery();
       }.bind(this));
       this.$.convertBtn.removeAttribute('disabled');
     },
 
     /**
-      * Observe the 'base' slot to update the view of this component and then
-      * send the request to the fixer-io api
-      * @param {string} newValue - new value of the slot
-      */
+     * Observe the 'base' slot to update the view of this component and then
+     * send the request to the fixer-io api
+     * @param {string} newValue - new value of the slot
+     */
     modelBaseChanged: function (newValue) {
       // update the view
       this.$.base.setAttribute('value', newValue);
@@ -104,22 +100,38 @@
         var baseUrl = 'https://free.currencyconverterapi.com/api/v6/convert';
         var queryUrl = baseUrl + '?q=' + conversionKey +
           '&date=' + queryDate + '&compact=y';
-        
         var self = this;
+        
+        function processRespond (data) {
+          // Update the Cubbles component model slots using the setters
+          var converted = data[conversionKey]['val'][queryDate];
+          self.setConversion(converted);
+          self.setConversionArray([
+            [self.getBase(), 1],
+            [self.getForeignCurrency(), converted]
+          ]);
+        }
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-          if (this.readyState == 4 && this.status == 200) {
-            var data = JSON.parse(xhttp.responseText);
-            // Update the Cubbles component model slots using the setters
-            var converted = data[conversionKey]['val'][queryDate];
-            self.setConversion(converted);
-            self.setConversionArray([[self.getBase(), 1],[self.getForeignCurrency(), converted]]);
-          }
-        };
-        xhttp.open("GET", queryUrl, true);
-        xhttp.send();
+        this.makeRequest(queryUrl, processRespond)
+
       }
+    },
+
+    /**
+     * Make the ajax request
+     */
+    makeRequest: function (queryUrl, processRespond) {
+      var self = this;
+
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse(xhttp.responseText);
+          processRespond(data);
+        }
+      };
+      xhttp.open("GET", queryUrl, true);
+      xhttp.send();
     }
   });
 }());
