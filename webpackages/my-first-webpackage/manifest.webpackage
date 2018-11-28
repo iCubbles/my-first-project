@@ -23,6 +23,22 @@
             "description": "Show the interface of this component."
           }
         ]
+      },
+      {
+        "artifactId": "rte-iframe-demo",
+        "description": "Demo to show how to use the iframe API from RTE",
+        "runnables": [
+          {
+            "name": "rte-iframe-demo",
+            "path": "/index.html",
+            "description": "This app shows the basic function of the RTE iframe API."
+          },
+          {
+            "name": "rte-iframe-demo-init",
+            "path": "/initialized.html",
+            "description": "This app shows how to initialized a component in the the RTE iframe API."
+          }
+        ]
       }
     ],
     "elementaryComponents": [
