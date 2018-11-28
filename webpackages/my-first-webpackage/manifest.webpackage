@@ -37,6 +37,11 @@
             "name": "rte-iframe-demo-init",
             "path": "/initialized.html",
             "description": "This app shows how to initialized a component in the the RTE iframe API."
+          },
+          {
+            "name": "rte-iframe-demo-resize",
+            "path": "/resizer.html",
+            "description": "This app shows how automatically resize the RTE iframe."
           }
         ]
       }
