@@ -52,7 +52,12 @@
           {
             "name": "outside-interaction",
             "path": "/outside-interaction.html",
-            "description": "Call this app as a simple demo."
+            "description": "Demo to show the outside interaction methods of the Cubbles Javascript API."
+          },
+          {
+            "name": "slot-change-interception",
+            "path": "/slot-change-interception.html",
+            "description": "Demo to show the how to intercept the change of a slot value using the Cubbles Javascript API."
           }
         ]
       }
