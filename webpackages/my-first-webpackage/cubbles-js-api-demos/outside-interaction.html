@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Interacting with &lt;cubx-textarea&gt;</title>
+
+  <script src="../../../cubx.core.rte@3.0.0-SNAPSHOT/webcomponents/custom-elements-es5-adapter.js"></script>
+  <script src="../../../cubx.core.rte@3.0.0-SNAPSHOT/webcomponents-lite/webcomponents-lite.js"></script>
+  <script src="../../../cubx.core.rte@3.0.0-SNAPSHOT/crc-loader/js/main.js" data-crcinit-loadcif="true"></script>
+</head>
+
+<body>
+  <cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@2.0.0-SNAPSHOT"></cubx-textarea>
+
+  <script>
+    (function(){
+      'use strict';
+
+      // 1. Get the component from DOM
+      var cubxTextarea = document.querySelector('cubx-textarea');
+
+      // 2. Wait until the component is ready to be used
+      document.addEventListener('cifReady', function() {
+        // Use set methods of slots to set the textare
+        cubxTextarea.setId('myTextArea');
+        cubxTextarea.setCols(40);
+        cubxTextarea.setRows(20);
+        cubxTextarea.setMinLength(100);
+        cubxTextarea.setMaxLength(500);
+
+        // 3. Use the get methods to get slots values and append it to 'textareaValue'
+        var textareaValue = '';
+        textareaValue += 'Id: ' + cubxTextarea.getId() + '\n';
+        textareaValue += 'Cols: ' + cubxTextarea.getCols() + '\n';
+        textareaValue += 'Rows: ' + cubxTextarea.getRows() + '\n';
+        textareaValue += 'MinLength: ' + cubxTextarea.getMinLength() + '\n';
+        textareaValue += 'MaxLength: ' + cubxTextarea.getMaxLength()+ '\n';
+
+        // 4. Get the slots list append it to the 'textareaValue'
+        textareaValue += '\nSlots definitions:\n' + JSON.stringify(cubxTextarea.slots(), null, '  ');
+
+        // 5. Set the value of the textarea with the 'textareaValue' string
+        cubxTextarea.setValue(textareaValue);
+      });
+    })()
+  </script>
+</body>
+</html>

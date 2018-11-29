@@ -44,6 +44,17 @@
             "description": "This app shows how automatically resize the RTE iframe."
           }
         ]
+      },
+      {
+        "artifactId": "cubbles-js-api-demos",
+        "description": "Demos to show howtouse the Cubbles javascript api",
+        "runnables": [
+          {
+            "name": "outside-interaction",
+            "path": "/outside-interaction.html",
+            "description": "Call this app as a simple demo."
+          }
+        ]
       }
     ],
     "elementaryComponents": [
