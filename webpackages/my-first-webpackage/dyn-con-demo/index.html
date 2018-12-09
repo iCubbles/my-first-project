@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Adding dynamic connections</title>
+
+    <script src="../../../cubx.core.rte@3.0.0-SNAPSHOT/webcomponents/custom-elements-es5-adapter.js"></script>
+    <script src="../../../cubx.core.rte@3.0.0-SNAPSHOT/webcomponents/webcomponents-lite.js"></script>
+    <script src="../../../cubx.core.rte@3.0.0-SNAPSHOT/crc-loader/js/main.js" data-crcinit-loadcif="true"></script>
+</head>
+
+<body>
+  <button id="button" disabled>Add dynamic connection</button>
+  <hr>
+  <cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@2.0.0-SNAPSHOT" id="sourceTA">
+    <cubx-core-init style="display:none">
+        <cubx-core-slot-init slot="value">"Value of the source textarea"</cubx-core-slot-init>
+        <cubx-core-slot-init slot="label">"Source textarea"</cubx-core-slot-init>
+    </cubx-core-init>
+  </cubx-textarea>
+  <cubx-textarea cubx-webpackage-id="com.incowia.basic-html-components@2.0.0-SNAPSHOT" id="destinationTA">
+    <cubx-core-init style="display:none">
+        <cubx-core-slot-init slot="label">"Destination textarea"</cubx-core-slot-init>
+    </cubx-core-init>
+  </cubx-textarea>
+  <script>
+    (function(){
+      'use strict';
+
+      var button = document.querySelector('#button');
+
+      // 1. Get the source and destination components from DOM
+      var sourceTextArea = document.querySelector('#sourceTA');
+      var destinationTextArea = document.querySelector('#destinationTA');
+
+      // 2. Listen to the 'cifReady' event to enable the 'Add dynamic connection' button
+      document.addEventListener('cifReady', function(event) {
+        button.removeAttribute('disabled');
+      });
+
+      // 3. Listen to the 'click' event
+      button.addEventListener('click', function () {
+        // 4. Instantiate and set the properties of the DynamicConnection object
+        var dynCon = new window.cubx.cif.DynamicConnection();
+        dynCon.setSourceRuntimeId(sourceTextArea.getAttribute('runtime-id'));
+        dynCon.setSourceSlot('value');
+        dynCon.setDestinationRuntimeId(destinationTextArea.getAttribute('runtime-id'));
+        dynCon.setDestinationSlot('value');
+        dynCon.setDirectExecution(true);
+
+        // 5. Add the DynamicConnection to the source component
+        sourceTextArea.addDynamicConnection(dynCon);
+
+        // 6. Disable the 'Add dynamic connection' button
+        button.setAttribute('disabled', 'disabled');
+      });
+    })()
+  </script>
+</body>
+</html>
