@@ -58,17 +58,11 @@
             "name": "slot-change-interception",
             "path": "/slot-change-interception.html",
             "description": "Demo to show the how to intercept the change of a slot value using the Cubbles Javascript API."
-          }
-        ]
-      },
-      {
-        "artifactId": "dyn-con-demo",
-        "description": "Demo to whow the use of dynamic connections",
-        "runnables": [
+          },
           {
             "name": "dyn-con-demo",
-            "path": "/index.html",
-            "description": "Call this app as a simple demo."
+            "path": "/dyn-con-demo.html",
+            "description": "Demo to show the use of dynamic connections."
           }
         ]
       }
