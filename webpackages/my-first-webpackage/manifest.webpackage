@@ -63,6 +63,11 @@
             "name": "dyn-con-demo",
             "path": "/dyn-con-demo.html",
             "description": "Demo to show the use of dynamic connections."
+          },
+          {
+            "name": "elementary-interaction-demo",
+            "path": "/elementary-interaction-demo.html",
+            "description": "Demo to show the behaviour of an elementary in action."
           }
         ]
       }
