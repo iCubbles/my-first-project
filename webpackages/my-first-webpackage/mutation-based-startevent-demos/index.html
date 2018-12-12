@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>&lt;cubx-textarea&gt;</title>
+    <script src="../../cubx.core.rte@3.0.0-SNAPSHOT/webcomponents/custom-elements-es5-adapter.js"></script>
+    <script src="../../cubx.core.rte@3.0.0-SNAPSHOT/webcomponents/webcomponents-lite.js"></script>
+    <script src="../../cubx.core.rte@3.0.0-SNAPSHOT/mutation-based-cubx-startevent/js/mutationBasedCubxStartevent.js"
+            data-cubx-target-selector="#observable"
+            data-cubx-emit-event="mutationBasedStart"></script>
+    <script>
+      window.cubx = {
+        CRCInit: {
+            rootDependencies: [
+              {
+                    webpackageId: 'com.incowia.basic-html-components@2.0.0-SNAPSHOT',
+                    artifactId: 'cubx-textarea'  
+              }
+            ]  
+        }
+      };
+    </script>
+    <script src="https://cubbles.world/sandbox/cubx.core.rte@3.0.0-SNAPSHOT/crc-loader/js/main.js" data-crcinit-loadcif="true" data-cubx-startevent="mutationBasedStart"></script>
+</head>
+
+<body>
+    <h1>Mutation based start event demo</h1>
+
+    <h2>Attributes values</h2>
+    <p>In this case, the attributes of the <em>mutation-based-cubx-startevent</em> have the following values:</p>
+    <ul>
+        <li><strong>data-cubx-mutation-target-node:</strong> "#observable"</li>
+        <li><strong>data-cubx-emit-event:</strong> "mutationBasedStart"</li>
+    </ul>
+    
+    <h2>How it works</h2>
+    <p>
+        Every change on the element with the id 'observable' will be detected, thus appending an
+        element will cause the 'mutationBasedStart' event to be dispatched.
+    </p>
+    <p>
+        Now you can <strong>click on</strong> the button below to cause the mutation to see it working:
+    </p>
+    <button id="appendComp">Append a 'cubx-textarea'</button>
+    <hr>
+    <div class="loader"></div>
+    <div id="observable"></div>
+
+    <script>
+        (function () {
+            'use strict';
+            var loader = document.querySelector('.loader');
+            var appendComp = document.querySelector('#appendComp');
+            var observable = document.querySelector('#observable');
+    
+            // Append the cubx-textarea component to the observable div after the appendComp button is clicked.
+            appendComp.addEventListener('click', function () {
+                observable.appendChild(createTextareaComponent());
+                appendComp.setAttribute('disabled', 'disabled');
+                loader.style.display = 'block';
+            });
+    
+            // Hide the loader and show the observable when the component is ready
+            document.addEventListener('cifReady', function () {
+                loader.style.display = 'none';
+                observable.style.display = 'block';
+            });
+    
+            // Function to Create the cubx-textarea component using the The Cubbles Tag API.
+            function createTextareaComponent() {
+                var init = document.createElement('cubx-core-init');
+                init.style.display = 'none';
+                init.appendChild(createSlotInit('label', '"Textarea label"'));
+                init.appendChild(createSlotInit('cols', '40'));
+                init.appendChild(createSlotInit('rows', '8'));
+                var testTextarea = document.createElement('cubx-textarea');
+                testTextarea.setAttribute('cubx-webpackage-id', 'com.incowia.basic-html-components@2.0.0-SNAPSHOT');
+                testTextarea.appendChild(init);
+                return testTextarea;
+            }
+    
+            // Function to create a cubx-core-slot-init using the The Cubbles Tag API.
+            function createSlotInit(slotName, slotValue) {
+                var slotInit = document.createElement('cubx-core-slot-init');
+                slotInit.setAttribute('slot', slotName);
+                slotInit.innerHTML = slotValue;
+                return slotInit;
+            }
+        })()
+    </script>
+</body>
+</html>

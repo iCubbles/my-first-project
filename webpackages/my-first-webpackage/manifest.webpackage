@@ -70,6 +70,17 @@
             "description": "Demo to show the behaviour of an elementary in action."
           }
         ]
+      },
+      {
+        "artifactId": "mutation-based-startevent-demos",
+        "description": "Demos to show hos the mutation based startevent utility works",
+        "runnables": [
+          {
+            "name": "mutation-based-startevent-demo",
+            "path": "/index.html",
+            "description": "Show how to use the mutation based start event utility from RTE."
+          }
+        ]
       }
     ],
     "elementaryComponents": [
