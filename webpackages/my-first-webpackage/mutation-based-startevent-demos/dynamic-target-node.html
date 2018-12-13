@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>&lt;cubx-textarea&gt;</title>
+    <script src="../../cubx.core.rte@3.0.0-SNAPSHOT/webcomponents/custom-elements-es5-adapter.js"></script>
+    <script src="../../cubx.core.rte@3.0.0-SNAPSHOT/webcomponents/webcomponents-lite.js"></script>
+    <script src="../../cubx.core.rte@3.0.0-SNAPSHOT/mutation-based-cubx-startevent/js/mutationBasedCubxStartevent.js"
+            data-cubx-target-selector="#observable"
+            data-cubx-emit-event="mutationBasedStart"></script>
+    <script>
+      window.cubx = {
+        CRCInit: {
+            rootDependencies: [
+              {
+                    webpackageId: 'com.incowia.basic-html-components@2.0.0-SNAPSHOT',
+                    artifactId: 'cubx-textarea'  
+              }
+            ]  
+        }
+      };
+    </script>
+    <script src="https://cubbles.world/sandbox/cubx.core.rte@3.0.0-SNAPSHOT/crc-loader/js/main.js" data-crcinit-loadcif="true" data-cubx-startevent="mutationBasedStart"></script>
+</head>
+
+<body>
+    <h1>Mutation based start event demo</h1>
+      
+    <h2>Attribute values</h2>
+    <p>The attributes have following values:</p>
+    <ul>
+        <li><strong>data-cubx-mutation-target-node:</strong> "#observable"</li>
+        <li><strong>data-cubx-emit-event:</strong> "mutationBasedStart"</li>
+    </ul>
+      
+    <h2>How it works</h2>
+    <p>
+        After the target node, in this case an element with the id 'observable', is added; every change
+        on the target node will be detected, thus adding an element within the target node will cause
+        the 'mutationBasedStart' to be dispatched.
+    </p>
+    <p>
+        Now you can perform the following steps to see it working:
+    </p>
+      
+    <ol>
+        <li>
+            First, the target node should be added:
+            <div><button id="appendTargetNode">Append target node</button></div>
+        </li>
+        <li>
+            Then, a component should be added to the target node, so that the rte starts working:
+            <div><button id="appendComp" disabled>Append 'cubx-textarea'</button></div>
+        </li>
+    </ol>
+      
+    <hr>
+    <div class="loader"></div>
+      
+    <script>
+        (function () {
+            'use strict';
+            var loader = document.querySelector('.loader');
+            var appendCompBtn = document.querySelector('#appendComp');
+            var appendTargetNodeBtn = document.querySelector('#appendTargetNode');
+            var targetNode = document.createElement('div');
+            targetNode.setAttribute('id', 'observable');
+      
+            appendTargetNodeBtn.addEventListener('click', function () {
+                document.body.appendChild(targetNode);
+                appendTargetNodeBtn.setAttribute('disabled', 'disabled');
+                appendCompBtn.removeAttribute('disabled');
+            });
+            appendCompBtn.addEventListener('click', function () {
+                targetNode.appendChild(createTextareaComponent());
+                appendCompBtn.setAttribute('disabled', 'disabled');
+                loader.style.display = 'block';
+            });
+      
+            document.addEventListener('cifReady', function () {
+                loader.style.display = 'none';
+                targetNode.style.display = 'block';
+            });
+      
+            function createTextareaComponent() {
+                var init = document.createElement('cubx-core-init');
+                init.style.display = 'none';
+                init.appendChild(createSlotInit('label', '"Textarea label"'));
+                init.appendChild(createSlotInit('value', '"Value of textarea"'));
+                init.appendChild(createSlotInit('cols', '40'));
+                init.appendChild(createSlotInit('rows', '8'));
+                var testTextarea = document.createElement('cubx-textarea');
+                testTextarea.setAttribute('cubx-webpackage-id', 'com.incowia.basic-html-components@2.0.0-SNAPSHOT');
+                testTextarea.appendChild(init);
+                return testTextarea;
+            }
+      
+            function createSlotInit(slotName, slotValue) {
+                var slotInit = document.createElement('cubx-core-slot-init');
+                slotInit.setAttribute('slot', slotName);
+                slotInit.innerHTML = slotValue;
+                return slotInit;
+            }
+        })()
+    </script>
+    </body>
+    </html>

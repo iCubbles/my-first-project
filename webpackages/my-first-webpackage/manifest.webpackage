@@ -79,6 +79,11 @@
             "name": "mutation-based-startevent-demo",
             "path": "/index.html",
             "description": "Show how to use the mutation based start event utility from RTE."
+          },
+          {
+            "name": "dynamic-target-node",
+            "path": "/dynamic-target-node.html",
+            "description": "Show how to use the mutation based start event utility from RTE."
           }
         ]
       }
